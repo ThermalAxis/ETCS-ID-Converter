@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--  <link rel="stylesheet" href="styles.css">
+-->
+    <title>ETCS ID Converter</title>
+
+    <script>
+      function ETCS_ID() {
+        var ETCS_ID = document.getElementById('ETCS_ID').value
+        var bin_NID_C = dec2bin(ETCS_ID).slice(0,(dec2bin(ETCS_ID).length-14))
+        var bin_NID_BG = dec2bin(ETCS_ID).slice((dec2bin(ETCS_ID).length-14),dec2bin(ETCS_ID).length)
+
+        var NID_C = parseInt(bin_NID_C,2)
+        var NID_BG = parseInt(bin_NID_BG,2)
+
+        console.log("NID_C = " + NID_C)
+        console.log("NID_BG = " + NID_BG)
+
+        document.getElementById('NID_C').value = NID_C
+        document.getElementById('NID_BG').value = NID_BG
+      }
+
+    function ETCS_ID_GEN() {
+      var NID_C = document.getElementById('NID_C').value
+      var NID_BG = document.getElementById('NID_BG').value
+      var bin_NID_C = dec2bin(NID_C)
+      var bin_NID_BG = dec2bin(NID_BG)
+
+      var ETCS_ID_GEN = (parseInt(bin_NID_BG,2) + parseInt(bin_NID_C*100000000000000,2))
+
+      console.log("Generated ETCS ID: " + ETCS_ID_GEN)
+
+      document.getElementById('ETCS_ID').value = ETCS_ID_GEN
+    }
+
+      function dec2bin(dec) {
+        return (dec >>> 0).toString(2);
+      }
+
+
+    </script>
+</head>
+
+<h1>ETCS ID Converter</h1>
+
+<p1></p1>Enter an values to convert:</p1><br><br>
+<label>ETCS ID: </label><br>
+<input type="number" id="ETCS_ID" name="ETCS_ID" onchange="ETCS_ID()"><br><br>
+
+<label>NID_BG: </label><br>
+<input type="number" id="NID_BG" name="NID_BG" onchange="ETCS_ID_GEN()"><br>
+<label>NID_C: </label><br>
+<input type="number" id="NID_C" name="NID_C" onchange="ETCS_ID_GEN()"><br>
+
+
+</body>
+</html>
